@@ -202,6 +202,51 @@ def save_train_test_metrics(train_losses, train_accuracies, test_losses, test_ac
         'test_accuracies': test_accuracies
     }, "output/" + model_name + "_" + filename)
 
+def save_model_checkpoint(model, optimizer, epoch, train_losses, train_accuracies, test_losses, test_accuracies, model_name, filename='model_checkpoint.pth'):
+    """
+    Save complete model checkpoint including model weights, optimizer state, and training history
+    
+    Args:
+        model: PyTorch model
+        optimizer: Optimizer
+        epoch: Current epoch number
+        train_losses: List of training losses
+        train_accuracies: List of training accuracies
+        test_losses: List of test losses
+        test_accuracies: List of test accuracies
+        model_name: Name of the model
+        filename: Filename for the checkpoint
+    """
+    checkpoint = {
+        'epoch': epoch,
+        'model_state_dict': model.state_dict(),
+        'optimizer_state_dict': optimizer.state_dict(),
+        'train_losses': train_losses,
+        'train_accuracies': train_accuracies,
+        'test_losses': test_losses,
+        'test_accuracies': test_accuracies,
+        'final_train_acc': train_accuracies[-1] if train_accuracies else 0,
+        'final_test_acc': test_accuracies[-1] if test_accuracies else 0,
+    }
+    
+    save_path = "output/" + model_name + "_" + filename
+    torch.save(checkpoint, save_path)
+    print(f"✅ Model checkpoint saved to {save_path}")
+    
+def save_model_for_inference(model, model_name, filename='model_best.pth'):
+    """
+    Save only the model state dict for inference/deployment
+    This creates a lighter weight file suitable for deployment
+    
+    Args:
+        model: PyTorch model
+        model_name: Name of the model
+        filename: Filename for the model weights
+    """
+    save_path = "output/" + model_name + "_" + filename
+    torch.save(model.state_dict(), save_path)
+    print(f"✅ Model weights saved to {save_path} (for deployment)")
+
 def save_plot_metrics(train_losses, train_accuracies, test_losses, test_accuracies, model_name, filename='training_plots.png'):
     # Plot training and test losses
     plot_metrics(train_losses, train_accuracies, test_losses, test_accuracies)

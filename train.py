@@ -9,7 +9,7 @@ import os
 
 from model import CNN_Model, get_optimizer, get_optimizer_params, get_train_transform, get_scheduler, get_scheduler_params
 
-from utils import compute_mean_std, data_loader, initialize_model, save_plot_metrics, save_train_test_metrics, train_model, find_lr, plot_lr_finder, save_lr_finder_plot
+from utils import compute_mean_std, data_loader, initialize_model, save_plot_metrics, save_train_test_metrics, train_model, find_lr, plot_lr_finder, save_lr_finder_plot, save_model_checkpoint, save_model_for_inference
 
 # Create output directory if it doesn't exist
 os.makedirs('output', exist_ok=True)
@@ -130,6 +130,15 @@ print("Training completed!")
 print("Saving training and testing metrics...")
 save_train_test_metrics(train_losses, train_accuracies, test_losses, test_accuracies, selected_model_class.__name__)
 print("Metrics saved successfully.")
+
+# Save complete model checkpoint
+print("Saving model checkpoint...")
+save_model_checkpoint(model, optimizer, epochs, train_losses, train_accuracies, test_losses, test_accuracies, 
+                     selected_model_class.__name__, filename='model_checkpoint.pth')
+
+# Save model weights for deployment
+print("Saving model weights for deployment...")
+save_model_for_inference(model, selected_model_class.__name__, filename='model_best.pth')
 
 # Save plot metrics for visualization
 print("Saving plot metrics...")
