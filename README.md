@@ -2,7 +2,7 @@
 
 ## 📋 Project Overview
 
-This project implements a ResNet-56 architecture from scratch to classify images from the CIFAR-100 dataset. The model achieves **73.68% test accuracy** after 100 epochs of training with optimal hyperparameters found using Learning Rate Finder.
+This project implements a ResNet-56 architecture from scratch to classify images from the CIFAR-100 dataset. The model achieves **73.84% highest test accuracy** after 100 epochs of training with optimal hyperparameters found using Learning Rate Finder.
 
 ## 🎯 Targets
 
@@ -18,7 +18,7 @@ This project implements a ResNet-56 architecture from scratch to classify images
 ### Final Performance
 | Metric | Training | Test |
 |--------|----------|------|
-| **Accuracy** | 79.97% | **73.68%** |
+| **Accuracy** | 79.97% | **73.84%** |
 | **Loss** | 0.6838 | 0.9517 |
 
 ### Training Configuration
@@ -542,4 +542,4 @@ This project is for educational purposes as part of the ERA V4 course.
 **Author**: Subhajit  
 **Course**: ERA V4 - Assignment 8  
 **Date**: October 2025  
-**Final Test Accuracy**: 73.68% 🎯
+**Highest Test Accuracy**: 73.84% 🎯
