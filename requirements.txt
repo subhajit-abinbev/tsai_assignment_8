@@ -1,0 +1,9 @@
+torch
+torchvision
+torchsummary
+albumentations
+numpy
+matplotlib
+seaborn
+pandas
+torch-lr-finder
